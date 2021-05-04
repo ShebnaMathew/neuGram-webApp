@@ -1,0 +1,201 @@
+body {
+    height: 100%;   
+    overflow: hidden;  /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
+    margin: 0px;  /*removes default style*/
+    display: flex;  /*enables flex content for its children*/
+    box-sizing: border-box;
+} 
+
+nav {
+    width: 100vw;
+}
+
+.main-app-layout {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container-no-margins {
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+}
+
+.root {
+    margin: 0% !important;
+}
+
+/* need to add media query for width here*/
+.custom-background-color {
+    background-image: linear-gradient(#87699c,  #99738E);
+    color: white;
+}
+
+.sidebar-profile-container {
+    width: 500px;
+    background-image: linear-gradient(#87699c,  #99738E);
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-bubble {
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    background-color: seashell;
+    padding: 5px; /* to center the text within the profile bubble*/
+}
+
+.btn-buffer {
+    margin-left: 1%;
+}
+
+.heart-color {
+    color:#da4343!important;
+    stroke: black;
+    stroke-width: 10;
+}
+
+.laugh-color {
+    color:	rgb(252, 200, 63);
+    stroke: black;
+    stroke-width: 10;
+
+}
+
+.sad-color {
+    color:rgb(35, 125, 199);
+    stroke: black;
+    stroke-width: 10;
+
+}
+
+.angry-color {
+    color:rgb(197, 46, 46);
+    stroke: black;
+    stroke-width: 10;
+}
+
+.username-reply {
+    font-weight: bold !important;
+}
+
+.reply-btn {
+    border-width: 0% !important;
+}
+
+.tag-color {
+    color:rgb(7, 96, 168)
+}
+
+.profile-bubble-column {
+    overflow-y: auto;
+    border-right: 3px solid #212529;
+    margin: 0;
+}
+
+.messages {
+    background-color: seashell;
+}
+
+.custom-btn-style {
+    background-color: #5d4270;
+    color: white;
+    border: 1px solid white;
+}
+
+.pop-button {
+    background-color: #d3a3c5;
+    color: black;
+    border: 1px solid black;
+    
+}
+
+.pop-button:hover {
+    background-color: #72576a;
+    color: white;
+}
+
+.custom-btn-style:hover {
+    background-color: #2d2036;
+    color: white;
+}
+
+.add-tag {
+    margin-top: 2.5%;
+}
+
+.add-post {
+    background-color: #aaa8a886;
+    color: #32253b;
+    margin: auto;
+    justify-content: center;
+    min-height: 500px;
+    width: 50%;
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.actn-btn {
+    margin-right: 10px !important;
+}
+
+.c-styler {
+    background-image: linear-gradient(#87699c,  #99738E);
+    color: white;
+    margin: auto;
+    justify-content: center;
+    min-height: 500px;
+    width: 50%;
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.posts {
+    height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 20vh; /*Add some padding*/
+}
+
+.post {
+    max-width: 50% !important;
+}
+
+.post-shadows {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
+}
+
+.reacts {
+    padding: 1%;
+}
+
+.post-img {
+    margin-top: 3% !important;
+}
+
+.scrollable {
+    height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 15vh;
+}
+
+.onboarding-slides {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.slide-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.slide-img {
+    max-width: 80vw;
+    max-height: 60vh;
+}
