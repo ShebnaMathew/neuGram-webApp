@@ -5,6 +5,12 @@ import Reply from "./Reply"
 const Post = ({id}) => {
     const posts = useSelector(state => state.posts);
 
+    const renderPicture = (data) => {
+        var image = new Image()
+        image.src = data
+        return image
+    }
+
     return (
         <div className="card mt-3 post post-shadows">
             <img src={posts[id].pictureUrl} className="card-img-top post-img" alt="..."/>
@@ -14,7 +20,7 @@ const Post = ({id}) => {
                 <p className="card-text">{posts[id].caption}</p>
                 <div className="row row-cols-auto">
                 {
-                     (posts[id].tags)?posts[id].tags.map((tag, i) => 
+                     (posts[id].tags.length > 0)?posts[id].tags.map((tag, i) => 
                         <div key={i} className="col">
                             <p className="card-text tag-color">{tag}</p>
                         </div>

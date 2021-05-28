@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { viewPost, addPost, getPosts } from "../redux/actions";
+import { viewPost, addPost, getPosts, uploadPic } from "../redux/actions";
 
 const AddPost = () => {
     const [postCaption, setPostCaption] = useState("");
@@ -9,10 +9,18 @@ const AddPost = () => {
     const [successMsg, setSuccessMsg] = useState(false);
 
     const username = useSelector(state => state.user.username);
+    const url = useSelector(state => state.url);
 
     const updateTags = tagsList => {
         // separate tags by whitespace
         setPostTags(tagsList.split(/\s+/));
+    }
+
+    const uploadPicture = (pic) => {
+        console.log("picture: ", pic)
+        dispatch(uploadPic(pic, setPictureURL));
+        //setPictureURL(pic)
+        
     }
 
     const dispatch = useDispatch();
@@ -44,6 +52,12 @@ const AddPost = () => {
                 </div>
                 <br></br>
                 <div className="mb-3">
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onChange={(e) => uploadPicture(e.target.files[0])}/>
+                        <button class="btn btn-outline-dark" type="button" id="inputGroupFileAddon04">Upload</button>
+                    </div>
+                </div>
+                {/* <div className="mb-3">
                     <b>
                         <label htmlFor="post-msg">Post Picture:</label>
                     </b>
@@ -59,7 +73,7 @@ const AddPost = () => {
                         }
                     }>
                     </input>
-                </div>
+                </div> */}
                 <br></br>
                 <div className= "mb-3">
                     <b>
@@ -82,6 +96,7 @@ const AddPost = () => {
                         type="button" 
                         id="buttonSubmit"
                         onClick={() => {
+                            
                             dispatch(addPost(postCaption, postPictureURL, postTags, username));
                             dispatch(getPosts());
                             setPostCaption("");
@@ -90,14 +105,14 @@ const AddPost = () => {
                             setTimeout(() => {
                                 setSuccessMsg(false);
                                 dispatch(viewPost());
-                            }, 3000)
+                            }, 1000)
                         }
                     }>Post</button>
                 </div>
                 <br></br>
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button 
-                        className="btn pop-button" 
+                        className="btn btn-outline-dark" 
                         aria-label = "buttonSubmit"
                         type="button" 
                         id="buttonSubmit"

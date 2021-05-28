@@ -44,7 +44,7 @@ const Header = () => {
                     
                 {
                     loginState === LOGIN_STATE.LOGGED_IN &&
-                    <button className="btn pop-button float-end" onClick={() => dispatch(logout())}>
+                    <button className="btn btn-outline-light float-end" onClick={() => dispatch(logout())}>
                         Log Out
                     </button> 
                 }

@@ -1,7 +1,7 @@
 import {INITIAL_STATE, LOGIN_STATE} from "./stateConstants";
 import { STORE_POSTS, LOGIN_SUCCESS, INVALID_LOGIN, LOGIN_NETWORK_ERROR, COMPLETE_ONBOARDING, 
 
-    LOGOUT, NEW_MESSAGE, CONNECTED, STORE_USERS, ADD_REPLY, UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS } from "./actionConstants";
+    LOGOUT, NEW_MESSAGE, UPDATE_DOWNLOAD_URL, CONNECTED, STORE_USERS, ADD_REPLY, UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS } from "./actionConstants";
 
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
@@ -16,6 +16,9 @@ function rootReducer(state = INITIAL_STATE, action) {
         }
         case ADD_POST_PAGE: {
             return {...state, viewState: ADD_POST_PAGE}
+        }
+        case CREATE_SUCCESS: {
+            return {...state, createdNewUser: action.payload.createdNewUser};
         }
         case STORE_USERS: {
             return {...state, users: action.payload.users};
@@ -68,6 +71,8 @@ function rootReducer(state = INITIAL_STATE, action) {
             return {...state,
                 posts:currentPostsWithReacts
             }
+        case UPDATE_DOWNLOAD_URL:
+            return {...state, url: action.payload.url}
         default:
             return state;
     }

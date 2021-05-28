@@ -16,5 +16,7 @@ export const INITIAL_STATE = {
     users: {},
     viewState: VIEW_POST,
     onlineUsers: {},
-    isNewUser: false
+    url: "",
+    isNewUser: false,
+    createdNewUser: false
 }

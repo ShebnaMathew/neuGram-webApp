@@ -2,8 +2,9 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess, loginFail} from "../redux/actions";
 import { joinChat } from "../client";
+import CreateUser from "./CreateUser";
 
-const Login = () => {
+const Login = (props) => {
 
     const [username, setUsername] = useState(""); 
     const [password, setPassword] = useState("");
@@ -20,7 +21,6 @@ const Login = () => {
         }
         return false;
     }
-
 
     const handleLogin = () => {
         const user = checkLogin(username, password);
@@ -85,6 +85,11 @@ const Login = () => {
                     <div className="d-grid gap-2 col-6 mx-auto">
                         <button className="btn custom-btn-style" onClick={handleLogin}>
                                 Log In
+                        </button>
+                    </div>
+                    <div className="d-grid gap-2 col-6 mx-auto">
+                        <button className="btn custom-btn-style" onClick={(e) => props.setCreate(true)}>
+                                Create an account
                         </button>
                     </div>
                 </div>

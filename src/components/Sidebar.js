@@ -4,22 +4,27 @@ import ProfileBubble from "./ProfileBubble";
 import {useSelector} from "react-redux";
 import { LOGIN_STATE } from "../redux/stateConstants";
 import InvalidLogin from "./InvalidLogin";
+import CreateUser from "./CreateUser";
+import { useState } from "react";
 
 const Sidebar = () => {
-    // TODO: get users online
-    // or whatever
-    // probably store in store; when client joins:
-
-    // TODO: either cap amount of users or scroll?
-    // overflow-y...
     const usersOnline = useSelector(state => state.onlineUsers);
     const users = Object.keys(usersOnline);
     const loginState = useSelector(state => state.loginState);
+    const createdNew = useSelector(state => state.createdNewUser);
+    const [create, setCreate] = useState(false);
     // console.log(users)
 
     return (
         <div className="container sidebar-profile-container container-no-margins">
-            {loginState === LOGIN_STATE.LOGGED_OUT && <Login />}
+            {
+            ((loginState === LOGIN_STATE.LOGGED_OUT) && (create)) ?
+                    <CreateUser setCreate={setCreate}/>:
+                 (loginState === LOGIN_STATE.LOGGED_OUT) ?
+                    <Login setCreate={setCreate} />:
+                     ""
+            }
+            
             {
                 loginState === LOGIN_STATE.LOGGED_IN && 
                 <>

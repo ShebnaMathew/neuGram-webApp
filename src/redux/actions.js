@@ -1,5 +1,6 @@
 import { COMPLETE_ONBOARDING, STORE_POSTS, LOGIN_SUCCESS, INVALID_LOGIN, 
-  LOGIN_NETWORK_ERROR, LOGOUT, NEW_MESSAGE, CONNECTED, STORE_USERS, ADD_REPLY, UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS } from "./actionConstants";
+  LOGIN_NETWORK_ERROR, LOGOUT, UPDATE_DOWNLOAD_URL, NEW_MESSAGE, CONNECTED, STORE_USERS, ADD_REPLY, 
+  UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS } from "./actionConstants";
 
 import firebase from "../data/fbConfig";
 
@@ -13,6 +14,13 @@ export const loginSuccess = user => ({
         user: user,
         completeOnboarding: user.isNewUser
     }
+});
+
+export const createdUser = () => ({
+  type: CREATE_SUCCESS,
+  payload: {
+      createdNewUser: true
+  }
 });
 
 export const loginFail = () => ({
@@ -108,9 +116,16 @@ const updateReacts = (postId, reacts) => ({
   }
 })
 
+const updateDownloadUrl = (url) => ({
+  type: UPDATE_DOWNLOAD_URL,
+  payload: {
+    url: url
+  }
+})
+
 export const getUsers = () => {
   return dispatch => {
-    const database = firebase.firestore();
+    
     database.collection("users")
       .get()
       .then((querySnapshot) => {
@@ -135,6 +150,29 @@ export const getUsers = () => {
       })
       .catch(error => {
         console.log("Error in loading users")
+      });
+      
+}};
+
+export const createUser = (username, password) => {
+  return dispatch => {
+    
+    database.collection("users")
+    .add({
+              username:username,
+              password:password,
+              isNewUser:true,
+              isPublic:true,
+              profilePicture:"",
+              friendsList:[]
+    })
+      .then((querySnapshot) => {
+        dispatch(createdUser());
+        dispatch(getUsers());
+
+      })
+      .catch(error => {
+        console.log("Error creating user")
       });
       
 }};
@@ -193,10 +231,41 @@ export const addReacts = (reacts, postId) => {
   }
 }
 
+export const uploadPic = (pictureUrl, setPicUrl) => {
+
+  console.log("upload pic action HERE")
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
+  var imagesRef = storageRef.child('images');
+  var postImagesRef = imagesRef.child(pictureUrl.name);
+  let postUrl = ""
+  postImagesRef.put(pictureUrl)
+  .then(() => postImagesRef.getDownloadURL())
+  .then((url) => {
+    setPicUrl(url)
+    postUrl = url
+  })
+  
+
+  return dispatch => {
+
+    //let url = download(postImagesRef)
+    console.log('download over url: ', postUrl)
+        dispatch(updateDownloadUrl(postUrl));
+    
+  }
+
+  
+}
+
+
+
 let d = new Date();
 export const addPost = (caption, pictureUrl, tags, username) => {
+  
+
   return dispatch => {
-    const database = firebase.firestore();
+    console.log("pic url: ", pictureUrl)
     database.collection("posts")
       .add({
         caption: caption,
@@ -211,7 +280,7 @@ export const addPost = (caption, pictureUrl, tags, username) => {
           console.log("Added new post")
       })
       .catch(error => {
-        console.log("Could not add the new post");
+        console.log("Could not add the new post: ", error);
 
       })
   }
