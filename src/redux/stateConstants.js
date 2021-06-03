@@ -18,5 +18,7 @@ export const INITIAL_STATE = {
     onlineUsers: {},
     url: "",
     isNewUser: false,
-    createdNewUser: false
+    createdNewUser: false,
+    profileView: false,
+    userView: ""
 }

@@ -30,7 +30,7 @@ const Sidebar = () => {
                 <>
                 <aside className="profile-bubble-column pe-2">
                     {users.map((username, index) => (
-                        <ProfileBubble key={index} username={username.substring(0, 3)} />
+                        <ProfileBubble key={index} username={username.substring(0, 3)} big={false} />
                     ))}
                 </aside>
                 <Chat/>

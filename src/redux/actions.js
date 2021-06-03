@@ -1,6 +1,6 @@
 import { COMPLETE_ONBOARDING, STORE_POSTS, LOGIN_SUCCESS, INVALID_LOGIN, 
   LOGIN_NETWORK_ERROR, LOGOUT, UPDATE_DOWNLOAD_URL, NEW_MESSAGE, CONNECTED, STORE_USERS, ADD_REPLY, 
-  UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS } from "./actionConstants";
+  UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS, TOGGLE_PROFILE_VIEW } from "./actionConstants";
 
 import firebase from "../data/fbConfig";
 
@@ -20,6 +20,14 @@ export const createdUser = () => ({
   type: CREATE_SUCCESS,
   payload: {
       createdNewUser: true
+  }
+});
+
+export const toggleView = (view, user) => ({
+  type: TOGGLE_PROFILE_VIEW,
+  payload: {
+      profileView: view,
+      userView: user
   }
 });
 

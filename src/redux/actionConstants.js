@@ -13,7 +13,7 @@ export const ADD_REPLY = "ADD_REPLY";
 export const UPDATE_REACTS = "UPDATE_REACTS";
 export const STORE_USERS = "STORE_USERS";
 
-
+export const TOGGLE_PROFILE_VIEW = "TOGGLE_PROFILE_VIEW";
 export const ADD_POST = "ADD_POST";
 export const ADD_POST_PAGE = "ADD_POST_PAGE";
 export const VIEW_POST = "VIEW_POST";
