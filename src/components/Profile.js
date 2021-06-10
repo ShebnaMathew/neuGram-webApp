@@ -1,5 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import Post from "./Post";
+import Settings from "./Settings";
 import { ADD_POST_PAGE, VIEW_POST } from "../redux/actionConstants";
 import AddPost from "./AddPost";
 import { LOGIN_STATE } from "../redux/stateConstants";
@@ -18,10 +19,12 @@ const Profile = (props) => {
     const username = useSelector(state => state.user.username);
     const picture = useSelector(state => state.user.profilePicture);
 
+    console.log("Profile component profile url: ", picture)
     return(
         <>
         <div className="justify-content-center">
-        <ProfileBubble username={userView.substring(0, 3)} big={true}/>
+        {/*<ProfileBubble username={userView.substring(0, 3)} big={true}/>*/}
+        <ProfileBubble userpicture={picture} username={username} big={true}/>
         </div>
         <div className="add-post-header">
             {

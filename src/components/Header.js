@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import { LOGIN_STATE } from "../redux/stateConstants";
-import { logout, addPostPage, completeOnboarding, toggleView } from "../redux/actions";
+import { logout, addPostPage, completeOnboarding, toggleView, settingsView, profileView } from "../redux/actions";
 import { VIEW_POST } from "../redux/actionConstants";
 import Profile from "./Profile"
 
@@ -17,20 +17,28 @@ const Header = () => {
 
     return (
         <nav className="navbar navbar-dark bg-dark header">
-            <div className="container-fluid">
+            <div className="container-fluid nav-width">
                 <button className="navbar-brand brand btn-dark" onClick={(e) => dispatch(toggleView(false, ""))}>Supergram</button>
                 <ul class="nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <button class="btn btn-dark nav-link" aria-current="page" onClick={(e) => dispatch(toggleView(true, username))}>{username}</button>
                     </li>
                 </ul>
-                
+                {/**onClick={() => dispatch(completeOnboarding(!isNewUser, userId))} */}
 
                 {
+                    // CHANGE TO SETTINGS PAGE
+                    // INCLUDE PROFILE PICTURE UPLOAD
+                    // ONBOARDING
+                    // PUBLIC OR PRIVATE PROFILE
                     loginState === LOGIN_STATE.LOGGED_IN && viewState === VIEW_POST && (isNewUser !== undefined && !isNewUser) &&
                     <>
-                        <button className="btn btn-buffer btn-dark help-btn" onClick={() => dispatch(completeOnboarding(!isNewUser, userId))}>
-                            ?
+                        <button className="btn btn-buffer btn-dark help-btn" onClick={(e) => {
+                            dispatch(settingsView(true)); 
+                            dispatch(toggleView(false, username));
+                        }
+                    }>
+                            Settings
                         </button>
                     </>
                 }

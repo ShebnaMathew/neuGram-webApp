@@ -1,6 +1,6 @@
 import { COMPLETE_ONBOARDING, STORE_POSTS, LOGIN_SUCCESS, INVALID_LOGIN, 
   LOGIN_NETWORK_ERROR, LOGOUT, UPDATE_DOWNLOAD_URL, NEW_MESSAGE, CONNECTED, STORE_USERS, ADD_REPLY, 
-  UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS, TOGGLE_PROFILE_VIEW } from "./actionConstants";
+  UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, UPDATE_PROFILE_PIC, CREATE_SUCCESS, TOGGLE_PROFILE_VIEW , DISPLAY_SETTINGS} from "./actionConstants";
 
 import firebase from "../data/fbConfig";
 
@@ -28,6 +28,13 @@ export const toggleView = (view, user) => ({
   payload: {
       profileView: view,
       userView: user
+  }
+});
+
+export const settingsView = (view) => ({
+  type: DISPLAY_SETTINGS,
+  payload: {
+      settingsView: view
   }
 });
 
@@ -128,6 +135,13 @@ const updateDownloadUrl = (url) => ({
   type: UPDATE_DOWNLOAD_URL,
   payload: {
     url: url
+  }
+})
+
+const updateProfilePicUrl = (url) => ({
+  type: UPDATE_PROFILE_PIC,
+  payload: {
+    profilePicture: url
   }
 })
 
@@ -253,17 +267,59 @@ export const uploadPic = (pictureUrl, setPicUrl) => {
     setPicUrl(url)
     postUrl = url
   })
-  
 
   return dispatch => {
 
-    //let url = download(postImagesRef)
     console.log('download over url: ', postUrl)
-        dispatch(updateDownloadUrl(postUrl));
+    dispatch(updateDownloadUrl(postUrl));
     
   }
+}
+
+  export const uploadProfilePic = (pictureUrl, setProfilePictureURL) => {
+
+    console.log("upload profile pic action HERE")
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var imagesRef = storageRef.child('images');
+    var postImagesRef = imagesRef.child(pictureUrl.name);
+    let profileUrl = ""
+    postImagesRef.put(pictureUrl)
+    .then(() => postImagesRef.getDownloadURL())
+    .then((url) => {
+      setProfilePictureURL(url)
+      profileUrl = url
+    })
+    
+  
+    return dispatch => {
+  
+      //let url = download(postImagesRef)
+      console.log('download over profile url: ', profileUrl)
+      //dispatch(updateProfilePicUrl(profileUrl));
+    }
 
   
+}
+
+export const updateUser = (pictureUrl, id) => {
+  return dispatch => {
+  
+    //let url = download(postImagesRef)
+    console.log('download over profile url: ', pictureUrl)
+        
+        database.collection("users").doc(id)
+        .update({
+          profilePicture: pictureUrl
+        })
+        .then(() => {
+          dispatch(updateProfilePicUrl(pictureUrl));
+          console.log("successfully uploaded profile picture: ", pictureUrl)
+        })
+        .catch(error => {
+          console.log("Could not add profile picture.",error);
+        })
+  }
 }
 
 

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import Post from "./Post";
+import Settings from "./Settings";
 import { ADD_POST_PAGE, VIEW_POST } from "../redux/actionConstants";
 import AddPost from "./AddPost";
 import { LOGIN_STATE } from "../redux/stateConstants";
@@ -10,7 +11,8 @@ const Posts = () => {
     const posts = useSelector(state => state.posts);
     const viewState = useSelector(state => state.viewState);
     const loginState = useSelector(state => state.loginState);
-    const view = useSelector(state => state.profileView);
+    const profileView = useSelector(state => state.profileView);
+    const settingsView = useSelector(state => state.settingsView);
     const isNewUser = useSelector(state => state.isNewUser);
     const userId = useSelector(state => state.user.userId);
     const username = useSelector(state => state.user.username);
@@ -30,7 +32,8 @@ const Posts = () => {
         <div className="container container-no-margins posts">
             
             
-            {(view) ? <Profile posts={rearrangedIds}/>:
+            {(profileView) ? <Profile posts={rearrangedIds}/>:
+            (settingsView) ? <Settings /> :
             <>
             <div className="add-post-header">
             {
@@ -51,8 +54,7 @@ const Posts = () => {
                 )
             })}
             </div>
-            </>
-            }
+            </>}
         </div>
     )
 }

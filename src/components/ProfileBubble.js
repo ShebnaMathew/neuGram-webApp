@@ -1,13 +1,16 @@
-const ProfileBubble = ({username, big}) => {
+const ProfileBubble = ({userpicture, username, big}) => {
     // render text right now, but could render a profile picture if it existed
+
+    if (userpicture === "") {
+        userpicture = username.substring(0,3)
+    }
+
+    console.log("userpicture: ", userpicture)
     return (
         (big) ?
-        <div className="rounded-circle profile-bubble-big m-1 text-center fst-italic">
-            {username}
-        </div>:
-        <div className="rounded-circle profile-bubble m-1 text-center fst-italic">
-            {username}
-        </div>
+        <img src={userpicture} className="card-img-top post-img rounded-circle profile-bubble-big m-1 text-center fst-italic" alt={username.substring(0,3)}/>
+        :
+        <img src={userpicture} className="card-img-top post-img rounded-circle profile-bubble m-1 text-center fst-italic" alt="..."/>
         
     )
 }

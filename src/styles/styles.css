@@ -11,6 +11,15 @@ nav {
     color: aliceblue;
 }
 
+.nav-width {
+    padding-bottom: 0.5% !important;
+}
+
+.settings {
+
+    padding: 10% 10% !important;
+}
+
 .brand {
     font-family: 'Lobster Two', cursive;
     font-size: x-large;
@@ -65,10 +74,10 @@ nav {
 }
 
 .profile-bubble-big {
-    min-width: 100px;
-    min-height: 100px;
-    max-width: 100px;
-    max-height: 100px;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 150px;
+    max-height: 150px;
     background-color: rgb(146, 99, 148);
     margin: 2% 45% !important;
     padding: 0% 0%; /* to center the text within the profile bubble*/

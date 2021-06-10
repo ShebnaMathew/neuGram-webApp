@@ -1,7 +1,7 @@
 import {INITIAL_STATE, LOGIN_STATE} from "./stateConstants";
 import { STORE_POSTS, LOGIN_SUCCESS, INVALID_LOGIN, LOGIN_NETWORK_ERROR, COMPLETE_ONBOARDING, 
 
-    LOGOUT, NEW_MESSAGE, UPDATE_DOWNLOAD_URL, CONNECTED, TOGGLE_PROFILE_VIEW, STORE_USERS, ADD_REPLY, UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS } from "./actionConstants";
+    LOGOUT, NEW_MESSAGE, UPDATE_DOWNLOAD_URL, CONNECTED, TOGGLE_PROFILE_VIEW, UPDATE_PROFILE_PIC, STORE_USERS, ADD_REPLY, UPDATE_REACTS, ADD_POST_PAGE, VIEW_POST, STORE_ONLINE_USERS, CREATE_SUCCESS, DISPLAY_SETTINGS } from "./actionConstants";
 
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
@@ -16,6 +16,9 @@ function rootReducer(state = INITIAL_STATE, action) {
         }
         case TOGGLE_PROFILE_VIEW: {
             return {...state, profileView: action.payload.profileView, userView: action.payload.userView}
+        }
+        case DISPLAY_SETTINGS: {
+            return {...state, settingsView: action.payload.settingsView}
         }
         case ADD_POST_PAGE: {
             return {...state, viewState: ADD_POST_PAGE}
@@ -76,6 +79,11 @@ function rootReducer(state = INITIAL_STATE, action) {
             }
         case UPDATE_DOWNLOAD_URL:
             return {...state, url: action.payload.url}
+        case UPDATE_PROFILE_PIC:
+            return {...state, user: {
+                ...state.user,
+                profilePicture: action.payload.profilePicture
+            }}
         default:
             return state;
     }

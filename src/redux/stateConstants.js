@@ -20,5 +20,7 @@ export const INITIAL_STATE = {
     isNewUser: false,
     createdNewUser: false,
     profileView: false,
-    userView: ""
+    userView: "",
+    settingsView: false,
+    profilePicture: ""
 }
